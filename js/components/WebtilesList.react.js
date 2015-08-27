@@ -17,26 +17,31 @@ var WebtilesList = React.createClass({
   render: function() /*object*/ {
     var rows = [];
     this.props.webtiles.forEach(function(webtile) {
+      var thumbStyle = {
+        backgroundImage: 'url(' + webtile.imageURI + ')'
+      };
+      var enhancedThumbStyle = {
+        backgroundImage: 'url(' + webtile.enhancedImageURI + ')'
+      };
       rows.push(
-        <li>
-          <img src={webtile.imageURI} />
-          <img src={webtile.enhancedImageURI} />
-          <dl>
-            <dt>Title</dt>
-            <dd>{webtile.title}</dd>
-            <dt>Type</dt>
-            <dd>{webtile.type}</dd>
-            <dt>URL</dt>
-            <dd><a href={webtile.url}>{webtile.url}</a></dd>
-          </dl>
-        </li>
+        <div className="newtab-cell">
+          <div className="newtab-site">
+            <a className="newtab-link" href={webtile.url} title={webtile.title}>
+              <img src={webtile.imageURI} />
+              <span className="newtab-thumbnail" style={thumbStyle}></span>
+              <span className="newtab-thumbnail enhanced-content" style={enhancedThumbStyle}></span>
+              <span className="newtab-title">{webtile.title}</span>
+            </a>
+
+          </div>
+        </div>
       );
     });
 
     return (
-      <ul>
+      <div id="newtab-grid">
         {rows}
-      </ul>
+      </div>
     );
   }
 
